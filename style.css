@@ -6,7 +6,6 @@ body {
   transition: background 0.6s ease, color 0.6s ease;
 }
 
-/* Transisi masuk dan keluar */
 .fade-enter {
   opacity: 0;
   transform: scale(0.98);
@@ -28,7 +27,6 @@ header, footer {
   text-align: center;
   position: relative;
 }
-
 header h1 {
   margin: 0;
 }
@@ -74,14 +72,12 @@ body.dark-mode #toggle-theme {
   padding: 2em;
   text-align: center;
 }
-
 .novel-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1.2em;
   margin-top: 1.5em;
 }
-
 .novel-card {
   background: #ffffffcc;
   border: 1px solid #ccd;
@@ -100,7 +96,6 @@ body.dark-mode #toggle-theme {
   width: 100%;
   border-radius: 6px;
 }
-
 footer {
   padding: 1em;
   margin-top: 3em;
@@ -110,7 +105,8 @@ footer {
   margin: 1em;
   text-align: center;
 }
-.filter-bar select, .filter-bar button {
+.filter-bar select,
+.filter-bar button {
   margin: 0.2em;
   padding: 0.5em;
   border-radius: 6px;
@@ -148,6 +144,7 @@ footer {
   background-color: #cf4b4b;
   transform: scale(1.02);
 }
+
 .ripple::after {
   content: "";
   position: absolute;
@@ -182,24 +179,28 @@ footer {
   animation: summonSpell 0.6s ease-out forwards;
 }
 @keyframes summonSpell {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) translateY(20px);
-  }
-  80% {
-    opacity: 1;
-    transform: scale(1.1) translateY(0);
-  }
-  100% {
-    transform: scale(1);
-  }
+  0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+  80% { opacity: 1; transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.volume-nav button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  transition: transform 0.1s ease;
+}
+.volume-nav button.pulse {
+  animation: pulseEffect 0.4s ease;
+}
+@keyframes pulseEffect {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 .volume-nav button.active {
   box-shadow: 0 0 10px rgba(255,255,255,0.4);
   transform: scale(1.1);
 }
 
-/* Aura genre background */
 body.aura-fantasy {
   background: linear-gradient(to right, #6a5acd 10%, #1c1c3c 90%);
   color: #eee;
