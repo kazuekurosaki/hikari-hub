@@ -1,3 +1,4 @@
+// === Data card di halaman utama ===
 const novels = [
   {
     title: "The Devil Princess",
@@ -17,7 +18,7 @@ const listContainer = document.getElementById("novel-list");
 const searchBar = document.getElementById("search");
 const toggleBtn = document.getElementById("toggle-theme");
 
-// === Halaman Utama ===
+// === Fungsi halaman utama ===
 function createCard(novel) {
   const card = document.createElement("div");
   card.className = "novel-card";
@@ -27,7 +28,7 @@ function createCard(novel) {
   `;
   card.addEventListener("click", () => {
     localStorage.setItem("selectedNovel", novel.title);
-    window.location.href = "detail.html";
+    navigateWithTransition("detail.html");
   });
   return card;
 }
@@ -50,10 +51,6 @@ function displayNovels(filter = "") {
   triggerScrollAnimation();
 }
 
-function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
-}
-
 function triggerScrollAnimation() {
   const cards = document.querySelectorAll(".novel-card");
   cards.forEach((card, i) => {
@@ -61,17 +58,34 @@ function triggerScrollAnimation() {
   });
 }
 
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+}
+
+function navigateWithTransition(url) {
+  document.body.classList.add("fade-exit");
+  setTimeout(() => window.location.href = url, 300);
+}
+
+// === Event halaman utama ===
 if (document.getElementById("genre-filter")) {
   document.getElementById("genre-filter").addEventListener("change", () => displayNovels(searchBar.value));
   document.getElementById("status-filter").addEventListener("change", () => displayNovels(searchBar.value));
   document.getElementById("random-btn").addEventListener("click", () => {
     const random = novels[Math.floor(Math.random() * novels.length)];
     localStorage.setItem("selectedNovel", random.title);
-    window.location.href = "detail.html";
+    navigateWithTransition("detail.html");
   });
   searchBar.addEventListener("input", e => displayNovels(e.target.value));
   toggleBtn.addEventListener("click", toggleDarkMode);
-  window.onload = () => displayNovels();
+  window.onload = () => {
+    document.body.classList.add("fade-enter");
+    setTimeout(() => {
+      document.body.classList.remove("fade-enter");
+      document.body.classList.add("fade-active");
+    }, 300);
+    displayNovels();
+  };
 }
 
 // === Halaman Detail ===
@@ -95,17 +109,44 @@ function loadDetailPage() {
       document.getElementById("fan-tl").textContent = novel.fan_tl;
       document.getElementById("synopsis").textContent = novel.synopsis;
 
+      // 🌈 Aura genre
+      const genreAuraMap = {
+        Fantasy: "aura-fantasy",
+        Romance: "aura-romance",
+        "Slice of Life": "aura-slice",
+        Comedy: "aura-comedy"
+      };
+      const auraClass = novel.genre.find(g => genreAuraMap[g]) && genreAuraMap[novel.genre.find(g => genreAuraMap[g])];
+      if (auraClass) {
+        document.body.classList.add(auraClass);
+      }
+
+      // 📦 Tombol Volume + WhatsApp
       const volNav = document.getElementById("volume-nav");
       const waBtn = document.getElementById("wa-read");
       volNav.innerHTML = "";
 
+      const genreColors = {
+        Fantasy: "#6a5acd",
+        Romance: "#e86b6b",
+        Slice: "#1eb980",
+        Comedy: "#ff9800",
+        Adventure: "#3f51b5",
+        Psychological: "#9c27b0"
+      };
+      const dominantGenre = novel.genre.find(g => genreColors[g]) || "Fantasy";
+      const bgColor = genreColors[dominantGenre];
+
       for (let i = 1; i <= novel.volumes; i++) {
         const btn = document.createElement("button");
         btn.textContent = `Volume ${i}`;
+        btn.style.backgroundColor = bgColor;
+        btn.style.animationDelay = `${i * 0.2}s`;
         btn.onclick = () => {
+          document.querySelectorAll(".volume-nav button").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
           const message = `Hai saya ingin membeli Volume ${i} dari ${novel.title}`;
-          const encoded = encodeURIComponent(message);
-          waBtn.href = `https://wa.me/6283822046782?text=${encoded}`;
+          waBtn.href = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
         };
         volNav.appendChild(btn);
       }
@@ -113,7 +154,14 @@ function loadDetailPage() {
 }
 
 if (window.location.pathname.includes("detail.html")) {
-  window.onload = loadDetailPage;
+  window.onload = () => {
+    document.body.classList.add("fade-enter");
+    setTimeout(() => {
+      document.body.classList.remove("fade-enter");
+      document.body.classList.add("fade-active");
+    }, 300);
+    loadDetailPage();
+  };
 }
 
 // ✨ Ripple effect
