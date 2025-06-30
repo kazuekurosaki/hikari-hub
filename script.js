@@ -136,7 +136,7 @@ function loadDetailPage() {
         Adventure: "#3f51b5",
         Psychological: "#9c27b0"
       };
-      const dominantGenre = novel.genre.find(g => genreColors[g]) || "Romance";
+      const dominantGenre = novel.genre.find(g => genreColors[g]) || "Fantasy";
       const bgColor = genreColors[dominantGenre];
 
       for (let i = 1; i <= novel.volumes; i++) {
@@ -150,7 +150,7 @@ function loadDetailPage() {
           btn.classList.add("active");
 
           const message = `Hai saya ingin membeli Volume ${i} dari ${novel.title}`;
-          waBtn.href = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
+          waBtn.href = `https://wa.me/6283822046782?text=${encodeURIComponent(message)}`;
 
           btn.classList.add("pulse");
           setTimeout(() => btn.classList.remove("pulse"), 400);
