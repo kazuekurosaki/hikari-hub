@@ -136,7 +136,7 @@ function loadDetailPage() {
         Adventure: "#3f51b5",
         Psychological: "#9c27b0"
       };
-      const dominantGenre = novel.genre.find(g => genreColors[g]) || "Fantasy";
+      const dominantGenre = novel.genre.find(g => genreColors[g]) || "Romance";
       const bgColor = genreColors[dominantGenre];
 
       for (let i = 1; i <= novel.volumes; i++) {
