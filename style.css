@@ -3,11 +3,27 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(#fefefe, #e0e7ff);
   color: #333;
+  transition: background 0.6s ease, color 0.6s ease;
 }
 
-header {
+/* Transisi masuk dan keluar */
+.fade-enter {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-exit {
+  opacity: 0;
+  transform: scale(1.05);
+}
+.fade-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+header, footer {
   background-color: #2f354d;
-  color: #fff;
+  color: white;
   padding: 1.5em;
   text-align: center;
   position: relative;
@@ -41,18 +57,14 @@ body.dark-mode {
   background: #0e101a;
   color: #eee;
 }
-
 body.dark-mode header,
 body.dark-mode footer {
   background-color: #1b1f2f;
-  color: #eee;
 }
-
 body.dark-mode .novel-card {
   background: #1f2333;
   border-color: #333;
 }
-
 body.dark-mode #toggle-theme {
   background: #2f354d;
   color: #fff;
@@ -80,37 +92,44 @@ body.dark-mode #toggle-theme {
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
-
 .novel-card.show {
   opacity: 1;
   transform: translateY(0);
 }
-
 .novel-card img {
   width: 100%;
   border-radius: 6px;
 }
 
 footer {
-  background-color: #2f354d;
-  color: white;
-  text-align: center;
   padding: 1em;
   margin-top: 3em;
 }
 
 .filter-bar {
-  margin-bottom: 1em;
+  margin: 1em;
   text-align: center;
 }
-
-.filter-bar select,
-.filter-bar button {
+.filter-bar select, .filter-bar button {
   margin: 0.2em;
   padding: 0.5em;
   border-radius: 6px;
   border: 1px solid #aaa;
   font-size: 1em;
+}
+
+.detail-container {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+  padding: 2em;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .read-btn {
@@ -125,12 +144,10 @@ footer {
   border-radius: 6px;
   transition: background-color 0.3s, transform 0.2s ease;
 }
-
 .read-btn:hover {
   background-color: #cf4b4b;
   transform: scale(1.02);
 }
-
 .ripple::after {
   content: "";
   position: absolute;
@@ -139,10 +156,60 @@ footer {
   transform: scale(0);
   animation: rippleEffect 0.6s linear;
 }
-
 @keyframes rippleEffect {
   to {
     transform: scale(4);
     opacity: 0;
   }
+}
+
+.volume-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+  margin-top: 1em;
+}
+.volume-nav button {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: summonSpell 0.6s ease-out forwards;
+}
+@keyframes summonSpell {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.1) translateY(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.volume-nav button.active {
+  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+  transform: scale(1.1);
+}
+
+/* Aura genre background */
+body.aura-fantasy {
+  background: linear-gradient(to right, #6a5acd 10%, #1c1c3c 90%);
+  color: #eee;
+}
+body.aura-romance {
+  background: linear-gradient(to right, #e86b6b 10%, #3a0a0a 90%);
+}
+body.aura-slice {
+  background: linear-gradient(to right, #1eb980 10%, #0a2f2f 90%);
+}
+body.aura-comedy {
+  background: linear-gradient(to right, #ff9800 10%, #332800 90%);
 }
