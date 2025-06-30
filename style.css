@@ -67,7 +67,6 @@ body.dark-mode #toggle-theme {
   background: #2f354d;
   color: #fff;
 }
-
 .new-section {
   padding: 2em;
   text-align: center;
@@ -96,11 +95,11 @@ body.dark-mode #toggle-theme {
   width: 100%;
   border-radius: 6px;
 }
+
 footer {
   padding: 1em;
   margin-top: 3em;
 }
-
 .filter-bar {
   margin: 1em;
   text-align: center;
@@ -120,7 +119,6 @@ footer {
   animation: fadeInUp 0.8s ease forwards;
   padding: 2em;
 }
-
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -160,47 +158,63 @@ footer {
   }
 }
 
-.volume-nav {
+/* Volume navigator swipeable */
+.volume-scroll {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5em;
-  margin-top: 1em;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1em 0;
+  gap: 0.8em;
 }
-.volume-nav button {
-  padding: 0.5em 1em;
-  border: none;
-  border-radius: 6px;
+.volume-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.volume-scroll::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+.volume-scroll button {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  padding: 0.6em 1.2em;
+  background: #2f354d;
   color: white;
+  border: none;
+  border-radius: 8px;
   font-weight: bold;
-  cursor: pointer;
   opacity: 0;
   transform: scale(0.8);
   animation: summonSpell 0.6s ease-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.volume-scroll button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+.volume-scroll button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+.volume-scroll button.pulse {
+  animation: pulseEffect 0.4s ease;
+}
+.volume-scroll button.active {
+  background-color: #e86b6b;
+  box-shadow: 0 0 12px #e86b6b99;
+  transform: scale(1.1);
 }
 @keyframes summonSpell {
   0% { opacity: 0; transform: scale(0.5) translateY(20px); }
   80% { opacity: 1; transform: scale(1.1); }
   100% { transform: scale(1); }
 }
-.volume-nav button:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-  transition: transform 0.1s ease;
-}
-.volume-nav button.pulse {
-  animation: pulseEffect 0.4s ease;
-}
 @keyframes pulseEffect {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
-.volume-nav button.active {
-  box-shadow: 0 0 10px rgba(255,255,255,0.4);
-  transform: scale(1.1);
-}
 
+/* Aura genre */
 body.aura-fantasy {
   background: linear-gradient(to right, #6a5acd 10%, #1c1c3c 90%);
   color: #eee;
