@@ -1,4 +1,4 @@
-// === Data card di halaman utama ===
+// === Data untuk halaman utama ===
 const novels = [
   {
     title: "The Devil Princess",
@@ -18,7 +18,7 @@ const listContainer = document.getElementById("novel-list");
 const searchBar = document.getElementById("search");
 const toggleBtn = document.getElementById("toggle-theme");
 
-// === Fungsi halaman utama ===
+// === Tampilan kartu novel di halaman utama ===
 function createCard(novel) {
   const card = document.createElement("div");
   card.className = "novel-card";
@@ -67,7 +67,7 @@ function navigateWithTransition(url) {
   setTimeout(() => window.location.href = url, 300);
 }
 
-// === Event halaman utama ===
+// === Event pada halaman utama ===
 if (document.getElementById("genre-filter")) {
   document.getElementById("genre-filter").addEventListener("change", () => displayNovels(searchBar.value));
   document.getElementById("status-filter").addEventListener("change", () => displayNovels(searchBar.value));
@@ -88,7 +88,7 @@ if (document.getElementById("genre-filter")) {
   };
 }
 
-// === Halaman Detail ===
+// === Halaman Detail Novel ===
 function loadDetailPage() {
   const selectedTitle = localStorage.getItem("selectedNovel");
   fetch('data/novels.json')
@@ -109,19 +109,19 @@ function loadDetailPage() {
       document.getElementById("fan-tl").textContent = novel.fan_tl;
       document.getElementById("synopsis").textContent = novel.synopsis;
 
-      // 🌈 Aura genre
+      // 🌈 Aura genre background
       const genreAuraMap = {
         Fantasy: "aura-fantasy",
         Romance: "aura-romance",
         "Slice of Life": "aura-slice",
         Comedy: "aura-comedy"
       };
-      const auraClass = novel.genre.find(g => genreAuraMap[g]) && genreAuraMap[novel.genre.find(g => genreAuraMap[g])];
+      const auraClass = novel.genre.find(g => genreAuraMap[g]);
       if (auraClass) {
-        document.body.classList.add(auraClass);
+        document.body.classList.add(genreAuraMap[auraClass]);
       }
 
-      // 📦 Tombol Volume + WhatsApp
+      // 📦 Tombol Volume dan WhatsApp Dinamis
       const volNav = document.getElementById("volume-nav");
       const waBtn = document.getElementById("wa-read");
       volNav.innerHTML = "";
@@ -129,7 +129,7 @@ function loadDetailPage() {
       const genreColors = {
         Fantasy: "#6a5acd",
         Romance: "#e86b6b",
-        Slice: "#1eb980",
+        "Slice of Life": "#1eb980",
         Comedy: "#ff9800",
         Adventure: "#3f51b5",
         Psychological: "#9c27b0"
@@ -142,12 +142,19 @@ function loadDetailPage() {
         btn.textContent = `Volume ${i}`;
         btn.style.backgroundColor = bgColor;
         btn.style.animationDelay = `${i * 0.2}s`;
+
         btn.onclick = () => {
           document.querySelectorAll(".volume-nav button").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
+
           const message = `Hai saya ingin membeli Volume ${i} dari ${novel.title}`;
-          waBtn.href = `https://wa.me/6283822046782?text=${encodeURIComponent(message)}`;
+          waBtn.href = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
+
+          // ✨ Pulse animation saat ditekan
+          btn.classList.add("pulse");
+          setTimeout(() => btn.classList.remove("pulse"), 400);
         };
+
         volNav.appendChild(btn);
       }
     });
@@ -164,7 +171,7 @@ if (window.location.pathname.includes("detail.html")) {
   };
 }
 
-// ✨ Ripple effect
+// ✨ Ripple effect untuk semua tombol .ripple
 document.querySelectorAll('.ripple').forEach(button => {
   button.addEventListener('click', function (e) {
     const ripple = document.createElement("span");
