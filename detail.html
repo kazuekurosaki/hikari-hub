@@ -27,7 +27,10 @@
         <p><strong>Fan TL:</strong> <span id="fan-tl"></span></p>
         <p class="synopsis" id="synopsis"></p>
 
-        <div class="volume-nav" id="volume-nav"></div>
+        <!-- Tombol volume horizontal swipe -->
+        <div class="volume-scroll" id="volume-nav"></div>
+
+        <!-- Tombol WA -->
         <a class="read-btn ripple" id="wa-read" target="_blank">🛒 Beli via WhatsApp</a>
       </div>
     </div>
@@ -46,7 +49,7 @@
     };
     (function() {
       var d = document, s = d.createElement('script');
-      s.src = 'https://hikaribunko-comments.disqus.com/embed.js'; // Ganti dengan shortname Disqus milikmu
+      s.src = 'https://hikaribunko-comments.disqus.com/embed.js';
       s.setAttribute('data-timestamp', +new Date());
       (d.head || d.body).appendChild(s);
     })();
