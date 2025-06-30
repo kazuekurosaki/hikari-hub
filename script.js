@@ -130,8 +130,8 @@ function loadDetailPage() {
 
       const genreColors = {
         Fantasy: "#6a5acd",
-        Romance: "#e86b6b",
-        "Slice of Life": "#1eb980",
+        Romance: "#EE82EE",
+        "Slice of Life": "#E6E6FA",
         Comedy: "#ff9800",
         Adventure: "#3f51b5",
         Psychological: "#9c27b0"
