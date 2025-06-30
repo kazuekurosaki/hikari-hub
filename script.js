@@ -79,4 +79,15 @@ document.getElementById("random-btn").addEventListener("click", () => {
   window.location.href = "detail.html";
 });
 
+document.querySelectorAll('.ripple').forEach(button => {
+  button.addEventListener('click', function (e) {
+    const circle = document.createElement("span");
+    circle.classList.add("ripple");
+    circle.style.left = `${e.offsetX}px`;
+    circle.style.top = `${e.offsetY}px`;
+    this.appendChild(circle);
+    setTimeout(() => circle.remove(), 600);
+  });
+});
+
 window.onload = () => displayNovels();
