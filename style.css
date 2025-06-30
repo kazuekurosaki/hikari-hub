@@ -221,13 +221,13 @@ body.aura-fantasy {
 }
 body.aura-romance {
   background: linear-gradient(to right, #FAFAD2 10%, #ed5858 90%);
-  color: #4F7942;
+  color: #EDEADE;
 }
 body.aura-slice {
   background: linear-gradient(to right, #1eb980 10%, #0a2f2f 90%);
-  color: #FFC000;
+  color: #FFFFF0;
 }
 body.aura-comedy {
   background: linear-gradient(to right, #ff9800 10%, #332800 90%);
-  color: #EDEADE;
+  color: #FFF5EE;
 }
