@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detail Novel - Hikari Bunko</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>📖 Hikari Bunko</h1>
+    <a href="index.html">⬅️ Kembali ke Beranda</a>
+  </header>
+
+  <main class="detail-container">
+    <div class="detail-content">
+      <img id="novel-img" src="" alt="Cover Novel" />
+      <div class="info-box">
+        <h2 id="novel-title"></h2>
+        <p><strong>Alias:</strong> <span id="alt-title"></span></p>
+        <p><strong>Status:</strong> <span id="status"></span></p>
+        <p><strong>Type:</strong> <span id="type"></span></p>
+        <p><strong>Genre:</strong> <span id="genre"></span></p>
+        <p><strong>Author:</strong> <span id="author"></span></p>
+        <p><strong>Artist:</strong> <span id="artist"></span></p>
+        <p><strong>Volumes:</strong> <span id="volumes"></span></p>
+        <p><strong>Fan TL:</strong> <span id="fan-tl"></span></p>
+        <p class="synopsis" id="synopsis"></p>
+
+        <div class="volume-nav" id="volume-nav"></div>
+        <a class="read-btn" id="wa-read" target="_blank">🛒 Beli via WhatsApp</a>
+      </div>
+    </div>
+
+    <section class="user-feedback">
+      <h3>💬 Diskusi Pembaca</h3>
+      <div id="disqus_thread"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = localStorage.getItem("selectedNovel") || document.title;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hikaribunko-comments.disqus.com/embed.js'; // Ganti sesuai shortname Disqus-mu
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Aktifkan JavaScript untuk melihat komentar dari Disqus.</noscript>
+</body>
+</html>
