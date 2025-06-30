@@ -1,4 +1,4 @@
-// === Data untuk halaman utama ===
+// === Data demo untuk halaman utama ===
 const novels = [
   {
     title: "The Devil Princess",
@@ -14,11 +14,12 @@ const novels = [
   }
 ];
 
+// === Elemen DOM ===
 const listContainer = document.getElementById("novel-list");
 const searchBar = document.getElementById("search");
 const toggleBtn = document.getElementById("toggle-theme");
 
-// === Tampilan kartu novel di halaman utama ===
+// === Render kartu novel ===
 function createCard(novel) {
   const card = document.createElement("div");
   card.className = "novel-card";
@@ -44,30 +45,28 @@ function displayNovels(filter = "") {
       (!genreVal || n.genre.includes(genreVal)) &&
       (!statusVal || n.status === statusVal)
     )
-    .forEach(n => {
-      const card = createCard(n);
-      listContainer.appendChild(card);
-    });
+    .forEach(n => listContainer.appendChild(createCard(n)));
+
   triggerScrollAnimation();
 }
 
 function triggerScrollAnimation() {
   const cards = document.querySelectorAll(".novel-card");
-  cards.forEach((card, i) => {
-    setTimeout(() => card.classList.add("show"), i * 150);
-  });
+  cards.forEach((card, i) => setTimeout(() => card.classList.add("show"), i * 150));
 }
 
+// === Dark Mode Toggle ===
 function toggleDarkMode() {
   document.body.classList.toggle("dark-mode");
 }
 
+// === Transisi halaman ===
 function navigateWithTransition(url) {
   document.body.classList.add("fade-exit");
   setTimeout(() => window.location.href = url, 300);
 }
 
-// === Event pada halaman utama ===
+// === Event halaman utama ===
 if (document.getElementById("genre-filter")) {
   document.getElementById("genre-filter").addEventListener("change", () => displayNovels(searchBar.value));
   document.getElementById("status-filter").addEventListener("change", () => displayNovels(searchBar.value));
@@ -76,8 +75,10 @@ if (document.getElementById("genre-filter")) {
     localStorage.setItem("selectedNovel", random.title);
     navigateWithTransition("detail.html");
   });
+
   searchBar.addEventListener("input", e => displayNovels(e.target.value));
   toggleBtn.addEventListener("click", toggleDarkMode);
+
   window.onload = () => {
     document.body.classList.add("fade-enter");
     setTimeout(() => {
@@ -91,12 +92,14 @@ if (document.getElementById("genre-filter")) {
 // === Halaman Detail Novel ===
 function loadDetailPage() {
   const selectedTitle = localStorage.getItem("selectedNovel");
+
   fetch('data/novels.json')
     .then(res => res.json())
     .then(data => {
       const novel = data.find(n => n.title === selectedTitle);
       if (!novel) return;
 
+      // Isi detail
       document.getElementById("novel-img").src = novel.cover;
       document.getElementById("novel-title").textContent = novel.title;
       document.getElementById("alt-title").textContent = novel.alt_title;
@@ -109,7 +112,7 @@ function loadDetailPage() {
       document.getElementById("fan-tl").textContent = novel.fan_tl;
       document.getElementById("synopsis").textContent = novel.synopsis;
 
-      // 🌈 Aura genre background
+      // Aura genre
       const genreAuraMap = {
         Fantasy: "aura-fantasy",
         Romance: "aura-romance",
@@ -117,14 +120,13 @@ function loadDetailPage() {
         Comedy: "aura-comedy"
       };
       const auraClass = novel.genre.find(g => genreAuraMap[g]);
-      if (auraClass) {
-        document.body.classList.add(genreAuraMap[auraClass]);
-      }
+      if (auraClass) document.body.classList.add(genreAuraMap[auraClass]);
 
-      // 📦 Tombol Volume dan WhatsApp Dinamis
+      // Tombol volume (swipeable)
       const volNav = document.getElementById("volume-nav");
       const waBtn = document.getElementById("wa-read");
       volNav.innerHTML = "";
+      volNav.className = "volume-scroll";
 
       const genreColors = {
         Fantasy: "#6a5acd",
@@ -144,13 +146,12 @@ function loadDetailPage() {
         btn.style.animationDelay = `${i * 0.2}s`;
 
         btn.onclick = () => {
-          document.querySelectorAll(".volume-nav button").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".volume-scroll button").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
 
           const message = `Hai saya ingin membeli Volume ${i} dari ${novel.title}`;
           waBtn.href = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
 
-          // ✨ Pulse animation saat ditekan
           btn.classList.add("pulse");
           setTimeout(() => btn.classList.remove("pulse"), 400);
         };
@@ -160,6 +161,7 @@ function loadDetailPage() {
     });
 }
 
+// === Event saat halaman detail dibuka ===
 if (window.location.pathname.includes("detail.html")) {
   window.onload = () => {
     document.body.classList.add("fade-enter");
@@ -171,7 +173,7 @@ if (window.location.pathname.includes("detail.html")) {
   };
 }
 
-// ✨ Ripple effect untuk semua tombol .ripple
+// === Ripple effect global ===
 document.querySelectorAll('.ripple').forEach(button => {
   button.addEventListener('click', function (e) {
     const ripple = document.createElement("span");
