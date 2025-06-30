@@ -146,7 +146,7 @@ function loadDetailPage() {
           document.querySelectorAll(".volume-nav button").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
           const message = `Hai saya ingin membeli Volume ${i} dari ${novel.title}`;
-          waBtn.href = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
+          waBtn.href = `https://wa.me/6283822046782?text=${encodeURIComponent(message)}`;
         };
         volNav.appendChild(btn);
       }
