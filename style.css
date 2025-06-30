@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(#fefefe, #e0e7ff);
+  color: #333;
+}
+
+header {
+  background-color: #2f354d;
+  color: #fff;
+  padding: 1.5em;
+  text-align: center;
+  position: relative;
+}
+
+header h1 {
+  margin: 0;
+}
+
+#search {
+  margin-top: 12px;
+  padding: 0.5em;
+  width: 80%;
+  max-width: 400px;
+  border: none;
+  border-radius: 8px;
+}
+
+#toggle-theme {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  background: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+body.dark-mode {
+  background: #0e101a;
+  color: #eee;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #1b1f2f;
+  color: #eee;
+}
+
+body.dark-mode .novel-card {
+  background: #1f2333;
+  border-color: #333;
+}
+
+body.dark-mode #toggle-theme {
+  background: #2f354d;
+  color: #fff;
+}
+
+.new-section {
+  padding: 2em;
+  text-align: center;
+}
+
+.novel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.2em;
+  margin-top: 1.5em;
+}
+
+.novel-card {
+  background: #ffffffcc;
+  border: 1px solid #ccd;
+  padding: 0.8em;
+  border-radius: 12px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.novel-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.novel-card img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+footer {
+  background-color: #2f354d;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  margin-top: 3em;
+}
+
+.filter-bar {
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.filter-bar select,
+.filter-bar button {
+  margin: 0.2em;
+  padding: 0.5em;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  font-size: 1em;
+}
