@@ -160,7 +160,7 @@ function loadDetailPage() {
           btn.classList.add("active");
 
           const message = `Hai saya ingin membeli Volume ${i} dari ${novel.title}`;
-          waBtn.href = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
+          waBtn.href = `https://wa.me/6283822046782?text=${encodeURIComponent(message)}`;
 
           btn.classList.add("pulse");
           setTimeout(() => btn.classList.remove("pulse"), 400);
