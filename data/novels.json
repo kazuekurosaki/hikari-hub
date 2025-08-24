@@ -13,7 +13,7 @@
     "fan_tl": "Gadgetized Panda",
     "synopsis": "I dream of a world filled with light. Family. School. Friends. Trains. Buses. Movies. Books. ‘I’ grow up in a world of light... and, in the end, I am enveloped in...",
     "cover": "img/novel2.jpg",
-    "wa_link": "https://wa.me/6283822046782"
+    "waBtn": "https://wa.me/6283822046782"
   },
   {
     "id": "kurusu-silent",
@@ -29,6 +29,6 @@
     "fan_tl": "Kazue Team",
     "synopsis": "Kurusu-san never speaks, yet every gesture speaks volumes. A quiet school love story that unfolds in the silence between heartbeats.",
     "cover": "img/novel4.jpg",
-    "wa_link": "https://wa.me/6283822046782"
+    "waBtn": "https://wa.me/6283822046782"
   }
 ]
